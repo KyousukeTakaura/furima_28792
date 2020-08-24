@@ -17,6 +17,7 @@ has_many :items, dependent: :destroy
 has_many :comments, dependent: :destroy
 has_one :credit_card, dependent: :destroy
 has_one :Shipping_address, dependent: :destroy
+has_one :item_purchases, dependent: :destroy
 
 ## Items テーブル
 
@@ -24,6 +25,11 @@ has_one :Shipping_address, dependent: :destroy
 | ------       | ------ | ----------- |
 |product_name | string | null: false |
 |product_description| text | null:false |
+|product_category | integer |null:false|
+|product_status | integer |null:false|
+|delivery_fee   | integer |null:false|
+|shipping_area  | integer |null:false|
+|shipping_days  | integer |null:false|
 |price          | integer |null:false|
 |product_image  |references|null:false|
 | user  |references|null:false, foreign_key:true|
@@ -49,18 +55,24 @@ belongs_to:items
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | postal_code | string | null: false |
+| prefectures | integer | null:false |
 | city | string | null: false |
 | house_number | string | null: false |
 | building_name | string | null: false |
 | phone_number | string | null: false |
 | user | references | null: false, foreign_key:true |
 Association
+has_one:item_purchases
 belongs_to:user
 
-## transaction テーブル
+## item_purchases テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | user| references | null: false, foreign_key: true|
 |items| references | null:false, foreign_key: true |
+Association
+belongs_to :user
+belongs_to:items
+belongs_to:Shipping_address
 
