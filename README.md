@@ -56,11 +56,11 @@ belongs_to:items
 | prefectures | integer | null:false |
 | city | string | null: false |
 | house_number | string | null: false |
-| building_name | string | null: false |
+| building_name | string |
 | phone_number | string | null: false |
 | user | references | null: false, foreign_key:true |
 Association
-has_one:item_purchases
+belongs_to:item_purchases
 
 
 ## item_purchases テーブル
@@ -71,5 +71,5 @@ has_one:item_purchases
 |items| references | null:false, foreign_key: true |
 Association
 belongs_to :user
-belongs_to:Shipping_address
+has_one:Shipping_address
 belongs_to:items
