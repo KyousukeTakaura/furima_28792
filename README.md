@@ -23,15 +23,10 @@ has_one :Shipping_address, dependent: :destroy
 | Column       |Type   | Options     |
 | ------       | ------ | ----------- |
 |product_name | string | null: false |
-|product_description| string | null:false |
-|product_category | references |null:false|
-|product_status | references |null:false|
-|delivery_fee   | references |null:false|
-|shipping_area  | references |null:false|
-|shipping_days  | references |null:false|
+|product_description| text | null:false |
 |price          | integer |null:false|
 |product_image  |references|null:false|
-| user_id       |references|null:false, foreign_key:true|
+| user  |references|null:false, foreign_key:true|
 Association
 belongs_to :user
 has_many :comments
@@ -41,34 +36,31 @@ has_many :comments
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 |comment | text | null: false |
-| user_id | references | null: false, foreign_key: true|
-|items_id | references | null:false, foreign_key: true |
+| user| references | null: false, foreign_key: true|
+|items| references | null:false, foreign_key: true |
 Association
 belongs_to :user
 belongs_to:items
 
-## credit_card テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| card_id | integer    |                                |
-| expiration_date  | integer| null: false |
-| security_cord    | integer | null: false |
-| user_id | references | null:false, foreign_key:true|
-Association
-belongs_to:user
 
 
 ## Shipping_address テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| postal_code | integer | null: false
-| prefectures | references | null: false
+| postal_code | string | null: false |
 | city | string | null: false |
 | house_number | string | null: false |
 | building_name | string | null: false |
-| phone_number | integer | null: false |
-| user_id | references | null: false, foreign_key:true |
+| phone_number | string | null: false |
+| user | references | null: false, foreign_key:true |
 Association
 belongs_to:user
+
+## transaction テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user| references | null: false, foreign_key: true|
+|items| references | null:false, foreign_key: true |
+
