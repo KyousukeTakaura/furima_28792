@@ -15,15 +15,13 @@
 Association
 has_many :items, dependent: :destroy
 has_many :comments, dependent: :destroy
-has_one :credit_card, dependent: :destroy
-has_one :Shipping_address, dependent: :destroy
-has_one :item_purchases, dependent: :destroy
+has_many :item_purchases, dependent: :destroy
 
 ## Items テーブル
 
 | Column       |Type   | Options     |
 | ------       | ------ | ----------- |
-|product_name | string | null: false |
+|name | string | null: false |
 |product_description| text | null:false |
 |product_category | integer |null:false|
 |product_status | integer |null:false|
@@ -36,7 +34,7 @@ has_one :item_purchases, dependent: :destroy
 Association
 belongs_to :user
 has_many :comments
-
+has_one :item_purchases
 ## comments テーブル
 
 | Column | Type       | Options                        |
@@ -63,7 +61,7 @@ belongs_to:items
 | user | references | null: false, foreign_key:true |
 Association
 has_one:item_purchases
-belongs_to:user
+
 
 ## item_purchases テーブル
 
@@ -73,6 +71,5 @@ belongs_to:user
 |items| references | null:false, foreign_key: true |
 Association
 belongs_to :user
-belongs_to:items
 belongs_to:Shipping_address
-
+belongs_to:items
