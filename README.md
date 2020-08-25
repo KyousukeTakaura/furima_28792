@@ -34,17 +34,17 @@ has_many :item_purchases, dependent: :destroy
 Association
 belongs_to :user
 has_many :comments
-has_one :item_purchases
+has_one :item_purchase
 ## comments テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 |comment | text | null: false |
 | user| references | null: false, foreign_key: true|
-|items| references | null:false, foreign_key: true |
+|item| references | null:false, foreign_key: true |
 Association
 belongs_to :user
-belongs_to:items
+belongs_to:item
 
 
 
@@ -59,8 +59,9 @@ belongs_to:items
 | building_name | string |
 | phone_number | string | null: false |
 | user | references | null: false, foreign_key:true |
+| item | references | null: false, foreign_key:true |
 Association
-belongs_to:item_purchases
+belongs_to:item_purchase
 
 
 ## item_purchases テーブル
@@ -68,8 +69,8 @@ belongs_to:item_purchases
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | user| references | null: false, foreign_key: true|
-|items| references | null:false, foreign_key: true |
+|item| references | null:false, foreign_key: true |
 Association
 belongs_to :user
 has_one:Shipping_address
-belongs_to:items
+belongs_to:item
