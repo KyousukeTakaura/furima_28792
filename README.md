@@ -13,9 +13,9 @@
 |family_name kana| string | null:false |
 |birth_day | date | null:false|
 Association
-has_many :items, dependent: :destroy
-has_many :comments, dependent: :destroy
-has_many :item_purchases, dependent: :destroy
+has_many :items,
+has_many :comments
+has_many :item_purchases
 
 ## Items テーブル
 
@@ -29,7 +29,7 @@ has_many :item_purchases, dependent: :destroy
 |shipping_area  | integer |null:false|
 |shipping_days  | integer |null:false|
 |price          | integer |null:false|
-|product_image  |references|null:false|
+|product_image  | string |null:false|
 | user  |references|null:false, foreign_key:true|
 Association
 belongs_to :user
@@ -58,8 +58,7 @@ belongs_to:item
 | house_number | string | null: false |
 | building_name | string |
 | phone_number | string | null: false |
-| user | references | null: false, foreign_key:true |
-| item | references | null: false, foreign_key:true |
+| item_purchase | references | null: false, foreign_key: true |
 Association
 belongs_to:item_purchase
 
