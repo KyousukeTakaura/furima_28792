@@ -1,24 +1,75 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Users テーブル
 
-Things you may want to cover:
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| nickname | string | null: false |
+| email    | string | null: false |
+| password | string | null: false |
+|first_name| string | null:false  |
+|last_name | string | null:false  |
+|first_name kana| string | null:false |
+|family_name kana| string | null:false |
+|birth_day | date | null:false|
+Association
+has_many :items,
+has_many :comments
+has_many :item_purchases
 
-* Ruby version
+## Items テーブル
 
-* System dependencies
+| Column       |Type   | Options     |
+| ------       | ------ | ----------- |
+|name | string | null: false |
+|product_description| text | null:false |
+|product_category | integer |null:false|
+|product_status | integer |null:false|
+|delivery_fee   | integer |null:false|
+|shipping_area  | integer |null:false|
+|shipping_days  | integer |null:false|
+|price          | integer |null:false|
+|product_image  | string |null:false|
+| user  |references|null:false, foreign_key:true|
+Association
+belongs_to :user
+has_many :comments
+has_one :item_purchase
+## comments テーブル
 
-* Configuration
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+|comment | text | null: false |
+| user| references | null: false, foreign_key: true|
+|item| references | null:false, foreign_key: true |
+Association
+belongs_to :user
+belongs_to:item
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
+## Shipping_address テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| postal_code | string | null: false |
+| prefectures | integer | null:false |
+| city | string | null: false |
+| house_number | string | null: false |
+| building_name | string |
+| phone_number | string | null: false |
+| item_purchase | references | null: false, foreign_key: true |
+Association
+belongs_to:item_purchase
 
-* Deployment instructions
 
-* ...
+## item_purchases テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user| references | null: false, foreign_key: true|
+|item| references | null:false, foreign_key: true |
+Association
+belongs_to :user
+has_one:Shipping_address
+belongs_to:item
