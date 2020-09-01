@@ -27,8 +27,6 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it 'passwordが6文字以上の時、登録できる' do
-        @user.password = '000000'
-        @user.password_confirmation = '000000'
         expect(@user).to be_valid
       end
     end
@@ -111,6 +109,17 @@ RSpec.describe User, type: :model do
         @user.family_name_kana = '道明寺'
         @user.valid?
         expect(@user.errors.full_messages).to include('Family name kana は全角カタカナで入力して下さい。')
+      end
+      it 'emailに@がない時、登録できない' do
+        @user.email = 'jhggvyj567464e'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
+      it 'passwordが半角英数字混合でない時、登録できない' do
+        @user.password = 'jitkjf'
+        @user.password = 'jitkjf'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password には英字と数字の両方を含めて設定してください")
       end
     end
   end
